@@ -160,7 +160,7 @@ class _DownloadItemViewState extends State<DownloadItemView> {
       if (e.code == 'PERMISSION_DENIED') {
         error = "Faylni ochish uchun tizimdan ruxsat olib bo'lmadi";
       } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
-        error = 'Permission denied - please ask the user to enable it from the app settings';
+        error = "Ruxsat rad etildi - foydalanuvchidan uni ilova sozlamalaridan yoqishini so'rang";
       }
       if (Platform.isIOS) print( "Faylni ochish uchun tizimdan ruxsat olib bo'lmadi");
     } catch (_) {
@@ -177,18 +177,18 @@ class _DownloadItemViewState extends State<DownloadItemView> {
       dir = (await getApplicationDocumentsDirectory()).path;
     }
     filePath = "$dir/${url.substring(url.lastIndexOf('/') + 1)}";
-    print("file path $filePath");
+    print("fayl yo'li $filePath");
 
     File file = File(filePath);
     var isExist = await file.exists();
     if (isExist) {
-      print('file exists----------');
+      print('Fayl mavjud----------');
       await OpenFile.open(filePath);
       setState(() {
         isDownloadContainerVisible = false;
       });
     } else {
-      print('file does not exist----------');
+      print('Fayl mavjud emas ----------');
       downloadFile(url);
     }
   }
@@ -223,6 +223,6 @@ class _DownloadItemViewState extends State<DownloadItemView> {
       isHAveDownloading = true;
     });
 
-    print("Download completed");
+    print("Yuklash yakunlandi");
   }
 }
